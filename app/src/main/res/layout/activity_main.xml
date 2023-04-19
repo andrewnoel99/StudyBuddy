@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/counttime"
+        android:id="@+id/textVeiw2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Study Buddy"
@@ -65,7 +65,7 @@
         tools:layout_editor_absoluteY="462dp" />
 
     <TextView
-        android:id="@+id/counttime"
+        android:id="@+id/textVeiw2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button"
