@@ -10,6 +10,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var mathButton: Button
+    private lateinit var StopBtn: Button
     private lateinit var csButton: Button
     private lateinit var startButton: Button
     private lateinit var countdownTV: TextView
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         csButton = findViewById(R.id.CSbtn)
         startButton = findViewById(R.id.StartBtn)
         countdownTV = findViewById(R.id.countdownTV)
+        StopBtn = findViewById(R.id.StopBtn)
 
         mathButton.setOnClickListener(this)
         csButton.setOnClickListener(this)
@@ -42,6 +44,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.CSbtn -> {
                 countdownLength = 15 * 60 * 1000 // 15 minutes
                 countdownTV.text = "15:00"
+            }
+            R.id.StopBtn -> {
+                countdown?.cancel()
+                countdownLength = 0
+                countdownTV.text = "00:00"
             }
             R.id.StartBtn -> startCountdown()
         }
@@ -64,4 +71,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }.start()
     }
+
+
 }
