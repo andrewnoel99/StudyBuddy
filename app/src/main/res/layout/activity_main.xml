@@ -7,38 +7,38 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textVeiw2"
+        android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Study Buddy"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOd="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216" />
+        app:layout_constraintVertical_bias="0.269" />
 
 
     <TextView
-        android:id="@+id/Welcome"
+        android:id="@+id/WelcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hey, what do you want to study?"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOd="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.269" />
+        app:layout_constraintVertical_bias="0.337" />
 
     <Button
         android:id="@+id/Mathbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="80dp"
         android:text="Math"
-        tools:layout_editor_absoluteX="76dp"
-        tools:layout_editor_absoluteY="339dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WelcomeText"
         tools:ignore="MissingConstraints" />
 
 
@@ -46,34 +46,40 @@
         android:id="@+id/CSbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="63dp"
         android:text="CS"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="260dp"
-        tools:layout_editor_absoluteY="339dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WelcomeText"
+        tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/StartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="75dp"
         android:text="Start Timer"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold|italic"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="134dp"
-        tools:layout_editor_absoluteY="462dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Mathbtn"
+        tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/textVeiw2"
+        android:id="@+id/countdownTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/StartBtn"
         android:layout_centerHorizontal="true"
-        android:layout_marginEnd="411dp"
+        android:layout_marginEnd="100dp"
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="DuplicateIds,MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
