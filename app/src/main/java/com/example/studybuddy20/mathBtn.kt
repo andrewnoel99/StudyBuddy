@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class mathBtn : AppCompatActivity() {
 
-    private var countdownLength: Long = 20 * 60 * 1000
+    private var countdownLength: Long = 25 * 60 * 1000
     private var countdown: CountDownTimer? = null
 
     @SuppressLint("MissingInflatedId")
@@ -28,21 +28,7 @@ class mathBtn : AppCompatActivity() {
             countdown?.cancel()
             countdownLength = 0
             findViewById<TextView>(R.id.countdownTV).text = "00:00"
-        }
-
-        findViewById<Button>(R.id.btnSave).setOnClickListener {
-            val taskName = findViewById<EditText>(R.id.txtAddTask).text.toString()
-            val db = FirebaseFirestore.getInstance()
-            val task: MutableMap<String, Any> = HashMap()
-            task["taskName"] = taskName
-            db.collection("Tasks")
-                .add(task)
-                .addOnSuccessListener {
-                    Log.d("dbfirebase", "save ${task}")
-                }
-                .addOnFailureListener{
-                    Log.d("dbfirebase Failed", "${task}")
-                }
+            // Why 00:00 --> change
         }
 
     }

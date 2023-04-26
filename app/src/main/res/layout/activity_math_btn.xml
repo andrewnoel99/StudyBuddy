@@ -6,74 +6,103 @@
     android:layout_height="match_parent"
     tools:context=".mathBtn">
 
-    <TextView
-        android:id="@+id/countdownTV"
+    <Button
+        android:id="@+id/btnPomodoro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:text="Pomodoro"
+        app:layout_constraintEnd_toStartOf="@+id/btnShortBreak"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnShortBreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Short Break"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnLongBreak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="Long Break"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnShortBreak"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTimerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="65dp"
         android:gravity="center"
-        android:text="20:00"
+        android:text="25:00"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.16"
-        tools:ignore="DuplicateIds,MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/btnShortBreak" />
+
+    <TextView
+        android:id="@+id/txtTTF"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="Time To Focus!"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTimerTV" />
 
     <Button
-        android:id="@+id/StartBtn"
+        android:id="@+id/btnStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="76dp"
-        android:text="Start Timer"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="370dp"
+        android:text="Start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/countdownTV"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/StopBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="332dp"
-        android:text="Stop Timer"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/btnRepeat"
+        android:layout_width="58dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="365dp"
+        android:layout_marginEnd="130dp"
+        android:contentDescription="@string/cs"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StartBtn"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/txtAddTask"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Task"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StopBtn"
-        app:layout_constraintVertical_bias="0.289" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnAddTask"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="470dp"
+        android:gravity="center"
+        android:text="+ Add Task "
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Task"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="550dp"
+        android:ellipsize="end"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtAddTask"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
