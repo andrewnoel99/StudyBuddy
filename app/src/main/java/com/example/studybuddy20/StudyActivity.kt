@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.Serializable
 
 class StudyActivity : AppCompatActivity() {
 
@@ -53,17 +54,17 @@ class StudyActivity : AppCompatActivity() {
         )
     )
 
-    private val myTechniques = mapOf(
+    val myTechniques = mapOf(
         "SQ3R" to listOf(
-            "Survey \n\n Skimming the chapter and taking notes" to 1,
+            "Survey \n\n Skimming the chapter and taking notes" to 3,
             "Break" to 1,
-            "Question \n\n Formulate questions around the chapter's content" to 1,
+            "Question \n\n Formulate questions around the chapter's content" to 3,
             "Break" to 1,
-            "Read \n\n Read full chapter and look for answers to the questions you made" to 1,
+            "Read \n\n Read full chapter and look for answers to the questions you made" to 3,
             "Break" to 1,
-            "Recite \n\n Summarize what you just read, recall and identify major points" to 1,
+            "Recite \n\n Summarize what you just read, recall and identify major points" to 2,
             "Break" to 1,
-            "Review\n\n Review material, quiz yourself" to 1
+            "Review\n\n Review material, quiz yourself" to 2
         ),
         "Pomodoro" to listOf(
             "Work \n\n Focus on a task" to 25,
@@ -90,6 +91,9 @@ class StudyActivity : AppCompatActivity() {
         )
     )
 
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_study)
@@ -104,18 +108,27 @@ class StudyActivity : AppCompatActivity() {
             startButton.setOnClickListener {
                 // Check if the selected technique is in the predefined techniques list
                 if (myTechniques.containsKey(technique.title)) {
-                    // Start the timer activity with the steps from myTechniques map
-                    // Start the timer activity with the steps from myTechniques map
                     val steps = myTechniques.getValue(technique.title)
-                    Log.d("Steps", steps.toString())
+                    val stepDurations = steps.map { it.first to it.second.times(60).toLong() }
+
                     val intent = Intent(this, TimerActivity::class.java).apply {
-                        putExtra("technique", technique)
-                        putStringArrayListExtra("steps", ArrayList(steps.map { it.first }))
+                        putExtra("techniqueTitle", technique.title)
+
+                        val stepsBundle = Bundle().apply {
+                            putSerializable("steps", ArrayList(stepDurations))
+                        }
+                        putExtras(stepsBundle)
                     }
                     startActivity(intent)
 
+
+
                 } else {
-                    Toast.makeText(this, "Please select a valid technique. Selected technique: ${technique.title}, Available techniques: ${myTechniques.keys}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Please select a valid technique. Selected technique: ${technique.title}, Available techniques: ${myTechniques.keys}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -125,4 +138,7 @@ class StudyActivity : AppCompatActivity() {
         startButton = findViewById(R.id.button_start_studying)
         startButton.isEnabled = false
     }
+
+
+
 }

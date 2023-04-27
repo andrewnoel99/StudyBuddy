@@ -8,73 +8,63 @@ import androidx.appcompat.app.AppCompatActivity
 
 class TimerActivity : AppCompatActivity() {
 
+    private lateinit var techniqueTitle: String
+    private lateinit var stepDurations: List<Pair<String, Long>>
     private lateinit var currentStep: String
-    private lateinit var steps: List<String>
-    private var isBreakPeriod = false
-    private var stepIndex = 0
-    private var timeRemaining = 0L
+    private var currentStepIndex: Int = 0
+    private var timeRemaining: Long = 0
     private lateinit var timer: CountDownTimer
-    private lateinit var currentStepTextView: TextView
-    private lateinit var timerTextView: TextView
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
 
-        val technique = intent.getStringExtra("technique")
-        steps = intent.getStringArrayListExtra("steps")?.toList() ?: emptyList()
+        // Retrieve the technique title and step durations from the intent
+        val intent = intent
+        techniqueTitle = intent.getStringExtra("techniqueTitle")!!
+        stepDurations = intent.getSerializableExtra("steps") as List<Pair<String, Long>>
 
-        Log.d("TimerActivity", "Technique: $technique, Steps: $steps") // Add this line
+        // Set the current step to the first step
+        currentStepIndex = 0
+        currentStep = stepDurations[currentStepIndex].first
 
-        // Set up the views
-        currentStepTextView = findViewById(R.id.current_step_text_view)
-        timerTextView = findViewById(R.id.timer_text_view)
+        // Start the timer with the duration of the first step
+        timeRemaining = stepDurations[currentStepIndex].second
+        startTimer()
 
-        // Start the first step
-        startStep()
+        // Set the technique title and current step on the screen
+        findViewById<TextView>(R.id.current_step_text_view).text = techniqueTitle
+        findViewById<TextView>(R.id.text_current_step).text = currentStep
+
     }
 
-
-    private fun startStep() {
-        // Set the current step text view to the next step
-        currentStep = steps[stepIndex]
-        currentStepTextView.text = currentStep
-
-        // Set the timer duration based on whether it's a work or break period
-        val duration = if (isBreakPeriod) 5 * 60 * 1000L else 20 * 60 * 1000L
-
-        // Start the timer
-        timer = object : CountDownTimer(duration, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-                timeRemaining = millisUntilFinished
-                updateTimerText()
-            }
-
+    private fun startTimer() {
+        timer = object : CountDownTimer(timeRemaining * 1000, 1000) {
             override fun onFinish() {
-                // Move to the next step or break period
-                if (isBreakPeriod) {
-                    stepIndex++
-                    if (stepIndex == steps.size) {
-                        // If all steps have been completed, finish the activity
-                        finish()
-                    } else {
-                        // If there are more steps, start the next one
-                        isBreakPeriod = false
-                        startStep()
-                    }
+                // If this is not the last step, move to the next step and start the timer again
+                if (currentStepIndex < stepDurations.size - 1) {
+                    currentStepIndex++
+                    currentStep = stepDurations[currentStepIndex].first
+                    timeRemaining = stepDurations[currentStepIndex].second
+                    startTimer()
+
+                    // Update the screen with the new step
+                    findViewById<TextView>(R.id.text_current_step).text = currentStep
                 } else {
-                    isBreakPeriod = true
-                    startStep()
+                    // If this is the last step, finish the activity
+                    finish()
                 }
             }
-        }.start()
-    }
 
-    private fun updateTimerText() {
-        val minutes = timeRemaining / 1000 / 60
-        val seconds = timeRemaining / 1000 % 60
-        timerTextView.text = String.format("%02d:%02d", minutes, seconds)
+            override fun onTick(millisUntilFinished: Long) {
+                // Update the time remaining on the screen
+                timeRemaining = millisUntilFinished / 1000
+                val minutes = timeRemaining / 60
+                val seconds = timeRemaining % 60
+                findViewById<TextView>(R.id.timer_text_view).text =
+                    String.format("%02d:%02d", minutes, seconds)
+            }
+        }.start()
     }
 
     override fun onDestroy() {
