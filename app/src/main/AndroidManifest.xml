@@ -20,6 +20,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".StudyActivity">
+        </activity>
+        <activity
+            android:name=".Technique">
+        </activity>
+        <activity
+            android:name=".TechniqueAdapter">
+        </activity>
+        <activity
+            android:name=".TimerActivity">
+        </activity>
     </application>
 
 </manifest>

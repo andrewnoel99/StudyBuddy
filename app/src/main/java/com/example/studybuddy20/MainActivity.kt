@@ -1,5 +1,6 @@
 package com.example.studybuddy20
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -14,6 +15,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var csButton: Button
     private lateinit var startButton: Button
     private lateinit var countdownTV: TextView
+    private lateinit var studyMethods: Button
 
     private var countdownLength: Long = 0
     private var countdown: CountDownTimer? = null
@@ -27,10 +29,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         startButton = findViewById(R.id.StartBtn)
         countdownTV = findViewById(R.id.countdownTV)
         StopBtn = findViewById(R.id.StopBtn)
+        studyMethods = findViewById(R.id.StudyMethodsBtn)
 
         mathButton.setOnClickListener(this)
         csButton.setOnClickListener(this)
         startButton.setOnClickListener(this)
+        studyMethods.setOnClickListener(this)
 
         countdownTV.text = "0"
     }
@@ -51,6 +55,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 countdownTV.text = "00:00"
             }
             R.id.StartBtn -> startCountdown()
+            R.id.StudyMethodsBtn ->{
+                val intent = Intent(this, StudyActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
