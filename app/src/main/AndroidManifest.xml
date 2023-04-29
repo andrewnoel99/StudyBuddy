@@ -12,6 +12,12 @@
         android:theme="@style/Theme.StudyBuddy20"
         tools:targetApi="31">
         <activity
+            android:name=".timerTaskActivity"
+            android:exported="false" />
+        <activity
+            android:name=".timerTask"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -20,18 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".StudyActivity">
-        </activity>
-        <activity
-            android:name=".Technique">
-        </activity>
-        <activity
-            android:name=".TechniqueAdapter">
-        </activity>
-        <activity
-            android:name=".TimerActivity">
-        </activity>
+        <activity android:name=".StudyActivity" />
+        <activity android:name=".Technique" />
+        <activity android:name=".TechniqueAdapter" />
+        <activity android:name=".TimerActivity" />
     </application>
 
 </manifest>

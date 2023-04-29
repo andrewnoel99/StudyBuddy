@@ -1,4 +1,4 @@
-package com.example.studybuddy20
+ package com.example.studybuddy20
 
 import android.os.Parcel
 import android.os.Parcelable
