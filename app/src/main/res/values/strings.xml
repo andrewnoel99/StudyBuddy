@@ -6,4 +6,9 @@
     <string name="cs">CS</string>
     <string name="start_timer">Start Timer</string>
     <string name="stop_timer">Stop Timer</string>
+
+    <string name="hint_minute">Minute</string>
+    <string name="message_minutes">Please Enter Minutes</string>
+
+
 </resources>
