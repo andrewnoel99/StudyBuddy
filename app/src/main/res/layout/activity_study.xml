@@ -12,19 +12,25 @@
         android:text="Select a study method"
         android:textSize="24sp" />
 
+    <TextView
+        android:id="@+id/selected_method_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selected study method: "
+        android:textSize="18sp" />
+
+
     <Button
         android:id="@+id/button_start_studying"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Start Studying"
         android:enabled="false"
-        />
-
+        android:text="Start Studying" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

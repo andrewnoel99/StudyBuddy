@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,55 +15,56 @@ class StudyActivity : AppCompatActivity() {
 
     private lateinit var startButton: Button
     private lateinit var recyclerView: RecyclerView
+    private lateinit var selectedMethodTextView: TextView
 
     private val techniques = listOf(
         Technique(
             "SQ3R", listOf(
-                "Survey (1 mins): skimming the chapter and taking notes",
-                "1 min break",
-                "Question (1 mins): formulate questions around the chapter's content",
-                "5 min break",
-                "Read (20 mins): read full chapter and look for answers to the questions you made",
-                "5 min break",
-                "Recite (20 mins): summarize what you just read, recall and identify major points",
-                "5 min break",
-                "Review (20 mins): review material, quiz yourself"
+                "Survey : skimming the chapter and taking notes",
+                "Break",
+                "Question : formulate questions around the chapter's content",
+                "Break",
+                "Read: read full chapter and look for answers to the questions you made",
+                "Break",
+                "Recite: summarize what you just read, recall and identify major points",
+                "Break",
+                "Review: review material, quiz yourself"
             )
         ),
         Technique(
             "Pomodoro", listOf(
-                "Work (25 mins): focus on a task",
-                "5 min break",
-                "Work (25 mins): focus on a task",
-                "5 min break",
-                "Work (25 mins): focus on a task",
-                "5 min break",
-                "Work (25 mins): focus on a task",
-                "20 min break"
+                "Work: focus on a task",
+                "Break",
+                "Work: focus on a task",
+                "Break",
+                "Work: focus on a task",
+                "Break",
+                "Work: focus on a task",
+                "Break"
             )
         ),
         Technique(
             "Feynman", listOf(
-                "Study (20 mins): focus on a topic",
-                "5 min break",
-                "Explain (20 mins): explain what you just studied, as if you were teaching it to someone",
-                "5 min break",
-                "Identify gaps (20 mins): identify areas you struggled with and revisit them",
-                "5 min break",
-                "Review (20 mins): review material, quiz yourself"
+                "Study: focus on a topic",
+                "Break",
+                "Explain: explain what you just studied, as if you were teaching it to someone",
+                "Break",
+                "Identify gaps: identify areas you struggled with and revisit them",
+                "Break",
+                "Review: review material, quiz yourself"
             )
         )
     )
 
     val myTechniques = mapOf(
         "SQ3R" to listOf(
-            "Survey \n\n Skimming the chapter and taking notes" to 3,
+            "Survey \n\n Skimming the chapter and taking notes" to 1,
             "Break" to 1,
-            "Question \n\n Formulate questions around the chapter's content" to 3,
+            "Question \n\n Formulate questions around the chapter's content" to 1,
             "Break" to 1,
-            "Read \n\n Read full chapter and look for answers to the questions you made" to 3,
+            "Read \n\n Read full chapter and look for answers to the questions you made" to 1,
             "Break" to 1,
-            "Recite \n\n Summarize what you just read, recall and identify major points" to 2,
+            "Recite \n\n Summarize what you just read, recall and identify major points" to 1,
             "Break" to 1,
             "Review\n\n Review material, quiz yourself" to 2
         ),
@@ -102,8 +104,12 @@ class StudyActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Initialize the selected method TextView
+        selectedMethodTextView = findViewById(R.id.selected_method_text_view)
+
         // Set up the adapter with the list of techniques and a click listener
         val adapter = TechniqueAdapter(techniques) { technique ->
+            selectedMethodTextView.text = "Selected study method: ${technique.title} Method"
             startButton.isEnabled = true
             startButton.setOnClickListener {
                 // Check if the selected technique is in the predefined techniques list

@@ -3,6 +3,9 @@ package com.example.studybuddy20
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.View
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -35,6 +38,23 @@ class TimerActivity : AppCompatActivity() {
         // Set the technique title and current step on the screen
         findViewById<TextView>(R.id.current_step_text_view).text = techniqueTitle
         findViewById<TextView>(R.id.text_current_step).text = currentStep
+
+        findViewById<Button>(R.id.pause_button).setOnClickListener { view ->
+            onPauseButtonClick(view)
+        }
+
+        findViewById<Button>(R.id.play_button).setOnClickListener { view ->
+            onPlayButton(view)
+        }
+
+
+
+        findViewById<Button>(R.id.play_button).setOnClickListener { view ->
+            onPlayButton(view)
+            findViewById<Button>(R.id.reset_button).isEnabled = true
+        }
+
+
 
     }
 
@@ -71,4 +91,31 @@ class TimerActivity : AppCompatActivity() {
         super.onDestroy()
         timer.cancel()
     }
+
+    private fun onPauseButtonClick(view: View) {
+        timer.cancel()
+        findViewById<Button>(R.id.play_button).isEnabled = true
+        findViewById<Button>(R.id.pause_button).isEnabled = false
+    }
+
+    private fun onPlayButton(view: View) {
+        startTimer()
+        findViewById<Button>(R.id.play_button).isEnabled = false
+        findViewById<Button>(R.id.pause_button).isEnabled = true
+    }
+    fun onResetButton(view: View) {
+        // Cancel the current timer
+        timer.cancel()
+
+        // Start a new timer with the duration of the current step
+        timeRemaining = stepDurations[currentStepIndex].second
+        startTimer()
+
+        // Update the screen with the new time remaining
+        val minutes = timeRemaining / 60
+        val seconds = timeRemaining % 60
+        findViewById<TextView>(R.id.timer_text_view).text = String.format("%02d:%02d", minutes, seconds)
+    }
+
+
 }
