@@ -1,6 +1,7 @@
 package com.example.studybuddy20
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -25,17 +26,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //mathButton = findViewById(R.id.Mathbtn)
-        //csButton = findViewById(R.id.CSbtn)
-        //startButton = findViewById(R.id.StartBtn)
-        //countdownTV = findViewById(R.id.countdownTV)
-        //StopBtn = findViewById(R.id.StopBtn)
         studyMethods = findViewById(R.id.StudyMethodsBtn)
-        timerButton = findViewById(R.id.btnTimer)
+        studyMethods.setBackgroundColor(Color.LTGRAY)
 
-        //mathButton.setOnClickListener(this)
-        //csButton.setOnClickListener(this)
-        //startButton.setOnClickListener(this)
+        timerButton = findViewById(R.id.btnTimer)
+        timerButton.setBackgroundColor(Color.LTGRAY)
         studyMethods.setOnClickListener(this)
         timerButton.setOnClickListener(this)
 
@@ -44,20 +39,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-//            R.id.Mathbtn -> {
-//                countdownLength = 20 * 60 * 1000 // 20 minutes
-//                countdownTV.text = "20:00"
-//            }
-//            R.id.CSbtn -> {
-//                countdownLength = 15 * 60 * 1000 // 15 minutes
-//                countdownTV.text = "15:00"
-//            }
-//            R.id.StopBtn -> {
-//                countdown?.cancel()
-//                countdownLength = 0
-//                countdownTV.text = "00:00"
-//            }
-//            R.id.StartBtn -> startCountdown()
+//
             R.id.btnTimer ->{
                 val intent = Intent(this, timerTaskActivity::class.java)
                 startActivity(intent)

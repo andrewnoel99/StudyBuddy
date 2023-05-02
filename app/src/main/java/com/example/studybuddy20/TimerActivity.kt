@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
@@ -17,10 +18,13 @@ class TimerActivity : AppCompatActivity() {
     private var currentStepIndex: Int = 0
     private var timeRemaining: Long = 0
     private lateinit var timer: CountDownTimer
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
+
+
 
         // Retrieve the technique title and step durations from the intent
         val intent = intent
@@ -38,6 +42,10 @@ class TimerActivity : AppCompatActivity() {
         // Set the technique title and current step on the screen
         findViewById<TextView>(R.id.current_step_text_view).text = techniqueTitle
         findViewById<TextView>(R.id.text_current_step).text = currentStep
+
+
+
+
 
         findViewById<Button>(R.id.pause_button).setOnClickListener { view ->
             onPauseButtonClick(view)
@@ -83,6 +91,8 @@ class TimerActivity : AppCompatActivity() {
                 val seconds = timeRemaining % 60
                 findViewById<TextView>(R.id.timer_text_view).text =
                     String.format("%02d:%02d", minutes, seconds)
+
+
             }
         }.start()
     }
@@ -115,6 +125,8 @@ class TimerActivity : AppCompatActivity() {
         val minutes = timeRemaining / 60
         val seconds = timeRemaining % 60
         findViewById<TextView>(R.id.timer_text_view).text = String.format("%02d:%02d", minutes, seconds)
+
+
     }
 
 

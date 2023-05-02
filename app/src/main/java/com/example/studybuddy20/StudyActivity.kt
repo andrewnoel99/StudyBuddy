@@ -105,11 +105,11 @@ class StudyActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Initialize the selected method TextView
-        selectedMethodTextView = findViewById(R.id.selected_method_text_view)
+        selectedMethodTextView = findViewById(R.id.text_view)
 
         // Set up the adapter with the list of techniques and a click listener
         val adapter = TechniqueAdapter(techniques) { technique ->
-            selectedMethodTextView.text = "Selected study method: ${technique.title} Method"
+            selectedMethodTextView.text = "${technique.title} Method"
             startButton.isEnabled = true
             startButton.setOnClickListener {
                 // Check if the selected technique is in the predefined techniques list
@@ -143,6 +143,7 @@ class StudyActivity : AppCompatActivity() {
         // Find the start button and disable it by default
         startButton = findViewById(R.id.button_start_studying)
         startButton.isEnabled = false
+        selectedMethodTextView.text = "Select a study method"
     }
 
 

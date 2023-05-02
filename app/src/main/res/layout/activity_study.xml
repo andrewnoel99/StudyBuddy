@@ -11,14 +11,9 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="Select a study method"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/selected_method_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selected study method: "
-        android:textSize="18sp" />
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
 
 
     <Button
