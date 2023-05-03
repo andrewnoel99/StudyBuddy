@@ -16,13 +16,13 @@
             android:exported="false"
             android:label ="@string/study_buddy"
             android:launchMode = "singleTask"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
         <activity
             android:name=".timerTaskActivity"
             android:exported="false" />

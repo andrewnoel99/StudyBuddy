@@ -9,7 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 class timerTaskActivity : AppCompatActivity() {
 
-    private val options = arrayOf("00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55", "60")
+    fun createArray(): Array<String> {
+        return Array(61) { i -> String.format("%02d", i) }
+    }
+
+    private val options = createArray()
 
     private var selectedItemSec: String = ""
     private var selectedItemMin: String = ""
@@ -18,6 +22,9 @@ class timerTaskActivity : AppCompatActivity() {
     private var countdownLengthSec: Long = 0
     private var countdownLength: Long = 0
     private var countdown: CountDownTimer? = null
+
+    private var isPaused = false
+    private var remianingTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,23 +36,23 @@ class timerTaskActivity : AppCompatActivity() {
 
         findViewById<Spinner>(R.id.setTimerMin).setOnItemSelectedListener(
             object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                selectedItemMin = parent.getItemAtPosition(position).toString()
-                val selectedItemMinLong = selectedItemMin.toLong()
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    selectedItemMin = ""
+                    selectedItemMin = parent.getItemAtPosition(position).toString()
+                    val selectedItemMinLong = selectedItemMin.toLong()
 
-                countdownLengthMin = selectedItemMinLong * 60 * 1000
-                findViewById<TextView>(R.id.txtMinTV).text = selectedItemMin
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Do nothing
-            }
-        })
+                    countdownLengthMin = selectedItemMinLong * 60 * 1000
+                    findViewById<TextView>(R.id.txtMinTV).text = selectedItemMin
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
+                }
+            })
 
         findViewById<Spinner>(R.id.setTimerSec).setOnItemSelectedListener(
             object : AdapterView.OnItemSelectedListener {
@@ -55,6 +62,7 @@ class timerTaskActivity : AppCompatActivity() {
                     position: Int,
                     id: Long
                 ) {
+                    selectedItemSec = ""
                     selectedItemSec = parent.getItemAtPosition(position).toString()
                     val selectedItemSecLong = selectedItemSec.toLong()
 
@@ -72,37 +80,45 @@ class timerTaskActivity : AppCompatActivity() {
             startCountdown()
         }
 
-        findViewById<Button>(R.id.btnRepeat).setOnClickListener {
-            findViewById<Button>(R.id.btnStart).isEnabled = true
+        findViewById<Button>(R.id.btnPause).setOnClickListener {
+            isPaused = true
             countdown?.cancel()
+            findViewById<Button>(R.id.btnStart).isEnabled = true
+        }
+
+        findViewById<Button>(R.id.btnRepeat).setOnClickListener {
+            countdown?.cancel()
+            findViewById<Button>(R.id.btnStart).isEnabled = true
             countdownLength = countdownLengthMin + countdownLengthSec
-            findViewById<TextView>(R.id.txtTimerTV).text = selectedItemMin + ":" + selectedItemSec
+            remianingTime = countdownLength
+            findViewById<TextView>(R.id.txtMinTV).text = selectedItemMin
+            findViewById<TextView>(R.id.txtSecTV).text = selectedItemSec
         }
     }
 
     private fun startCountdown() {
         findViewById<Button>(R.id.btnStart).isEnabled = false
         countdown?.cancel()
-
-        println(countdownLengthMin)
-        println(countdownLengthSec)
-        println(countdownLength)
         countdownLength = countdownLengthMin + countdownLengthSec
 
-        countdown = object : CountDownTimer(countdownLength, 1000) {
+        val TimeRemaining = if (isPaused) remianingTime else countdownLength
+
+        countdown = object : CountDownTimer(TimeRemaining, 1000) {
             override fun onTick(millisUntilFinished: Long) {
+                remianingTime = millisUntilFinished
+                isPaused = false
                 val minutes = millisUntilFinished / 1000 / 60
                 val seconds = (millisUntilFinished / 1000) % 60
 
-                val formattedTime = String.format("%02d:%02d", minutes, seconds)
-                findViewById<TextView>(R.id.txtTimerTV).text = formattedTime
-                findViewById<TextView>(R.id.txtMinTV).text = ""
-                findViewById<TextView>(R.id.txtSecTV).text = ""
-
+                val formattedTimeMin = String.format("%02d", minutes)
+                val formattedTimeSec = String.format("%02d", seconds)
+                findViewById<TextView>(R.id.txtMinTV).text = formattedTimeMin
+                findViewById<TextView>(R.id.txtSecTV).text = formattedTimeSec
             }
 
             override fun onFinish() {
-                findViewById<TextView>(R.id.txtTimerTV).text = "00:00"
+                findViewById<TextView>(R.id.txtMinTV).text = "00"
+                findViewById<TextView>(R.id.txtSecTV).text = "00"
                 findViewById<Button>(R.id.btnStart).isEnabled = true
             }
         }.start()
