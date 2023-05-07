@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_1">
+    android:background="@color/light_green">
 
     <TextView
         android:id="@+id/current_step_text_view"
@@ -64,7 +64,9 @@
         android:layout_marginTop="567dp"
         android:layout_marginEnd="262dp"
         android:layout_marginBottom="109dp"
-        android:background="@drawable/ic_pause" />
+        android:background="@drawable/ic_pause"
+        android:backgroundTint="@android:color/black"
+        />
 
 
     <Button
@@ -83,7 +85,9 @@
         android:enabled="false"
         android:onClick="onPlayButton"
         android:textColor="@android:color/white"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:backgroundTint="@android:color/black"
+        />
 
     <Button
         android:id="@+id/reset_button"
@@ -99,7 +103,10 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="97dp"
         android:background="@drawable/ic_reset"
-        android:onClick="onResetButton"/>
+        android:onClick="onResetButton"
+        android:backgroundTint="@android:color/black"
+        android:textColor="@android:color/black"
+        />
 
 
 

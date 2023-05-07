@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity2 : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
@@ -43,28 +43,29 @@ class LoginActivity : AppCompatActivity() {
         }
 
         createAccountButton.setOnClickListener {
-            val email = emailEditText.text.toString()
-            val password = passwordEditText.text.toString()
-
-            mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this) { task ->
-                    if (task.isSuccessful) {
-                        Toast.makeText(
-                            this,
-                            "Account created.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    } else {
-                        Toast.makeText(
-                            this,
-                            "Account creation failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+//            val email = emailEditText.text.toString()
+//            val password = passwordEditText.text.toString()
+//
+//            mAuth.createUserWithEmailAndPassword(email, password)
+//                .addOnCompleteListener(this) { task ->
+//                    if (task.isSuccessful) {
+//                        Toast.makeText(
+//                            this,
+//                            "Account created.",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//
+//                        finish()
+//                    } else {
+//                        Toast.makeText(
+//                            this,
+//                            "Account creation failed.",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
         }
     }
 }

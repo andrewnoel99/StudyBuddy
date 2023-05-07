@@ -1,5 +1,6 @@
 package com.example.studybuddy20
 
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
@@ -18,7 +19,9 @@ class TimerActivity : AppCompatActivity() {
     private var currentStepIndex: Int = 0
     private var timeRemaining: Long = 0
     private lateinit var timer: CountDownTimer
-    private lateinit var progressBar: ProgressBar
+    private lateinit var pause: Button
+    private lateinit var play: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

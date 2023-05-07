@@ -1,6 +1,7 @@
 package com.example.studybuddy20
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -16,6 +17,8 @@ class StudyActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var selectedMethodTextView: TextView
+
+
 
     private val techniques = listOf(
         Technique(
@@ -99,6 +102,9 @@ class StudyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_study)
+
+        startButton = findViewById(R.id.button_start_studying)
+        startButton.setBackgroundColor(Color.parseColor("#356859"))
 
         // Find the RecyclerView and set its layout manager
         recyclerView = findViewById(R.id.recycler_view)
