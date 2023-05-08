@@ -1,6 +1,8 @@
 package com.example.studybuddy20
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -21,6 +23,7 @@ class LoginActivity2 : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.userPasswordET)
         val loginButton = findViewById<Button>(R.id.login_button)
         val createAccountButton = findViewById<Button>(R.id.create_account_button)
+        val guest_button = findViewById<Button>(R.id.guestButton)
 
         loginButton.setOnClickListener {
             val email = emailEditText.text.toString()
@@ -33,6 +36,7 @@ class LoginActivity2 : AppCompatActivity() {
                         startActivity(intent)
                         finish()
                     } else {
+                        Log.d(TAG, "signInWithEmail:failure", task.exception)
                         Toast.makeText(
                             this,
                             "Authentication failed.",
@@ -43,29 +47,36 @@ class LoginActivity2 : AppCompatActivity() {
         }
 
         createAccountButton.setOnClickListener {
+
+            val email = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        Toast.makeText(
+                            this,
+                            "Account created.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        val intent = Intent(this, MainActivity::class.java)
+                        startActivity(intent)
+
+                        finish()
+                    } else {
+                        Toast.makeText(
+                            this,
+                            "Account creation failed.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
+
+        //when guest button is clicked, go to main activity
+        guest_button.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-//            val email = emailEditText.text.toString()
-//            val password = passwordEditText.text.toString()
-//
-//            mAuth.createUserWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this) { task ->
-//                    if (task.isSuccessful) {
-//                        Toast.makeText(
-//                            this,
-//                            "Account created.",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//
-//                        finish()
-//                    } else {
-//                        Toast.makeText(
-//                            this,
-//                            "Account creation failed.",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                    }
-//                }
         }
     }
 }
