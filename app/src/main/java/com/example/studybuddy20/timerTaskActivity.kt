@@ -1,10 +1,14 @@
 package com.example.studybuddy20
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.studybuddy20.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class timerTaskActivity : AppCompatActivity() {
@@ -94,6 +98,11 @@ class timerTaskActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.txtMinTV).text = selectedItemMin
             findViewById<TextView>(R.id.txtSecTV).text = selectedItemSec
         }
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            onNavigationItemSelected(item)
+        }
     }
 
     private fun startCountdown() {
@@ -122,5 +131,24 @@ class timerTaskActivity : AppCompatActivity() {
                 findViewById<Button>(R.id.btnStart).isEnabled = true
             }
         }.start()
+    }
+
+    fun onClick(view: View?) {
+        when (view?.id) {
+            R.id.home ->{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+    }
+
+    private fun onNavigationItemSelected(item: MenuItem): Boolean{
+        when (item.itemId){
+            R.id.home ->{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return false;
     }
 }

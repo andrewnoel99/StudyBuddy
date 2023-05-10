@@ -4,9 +4,13 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.studybuddy20.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,6 +26,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         studyMethods.setOnClickListener(this)
         timerButton.setOnClickListener(this)
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            onNavigationItemSelected(item)
+        }
     }
 
     override fun onClick(view: View?) {
@@ -36,4 +45,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    private fun onNavigationItemSelected(item: MenuItem): Boolean{
+        when (item.itemId){
+            R.id.home ->{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        return false;
+    }
+
 }
