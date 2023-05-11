@@ -35,6 +35,8 @@
         <activity android:name=".Technique" />
         <activity android:name=".TechniqueAdapter" />
         <activity android:name=".TimerActivity" />
+        <activity android:name=".MusicPlayer" />
+
     </application>
 
 </manifest>

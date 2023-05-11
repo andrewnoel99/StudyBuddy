@@ -145,6 +145,10 @@ class TimerActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.music ->{
+                val intent = Intent(this, MusicPlayer::class.java)
+                startActivity(intent)
+            }
             R.id.logout ->{
                 val intent = Intent(this, LoginActivity2::class.java)
                 startActivity(intent)

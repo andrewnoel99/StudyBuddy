@@ -2,6 +2,7 @@ package com.example.studybuddy20
 
 import android.content.Intent
 import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -19,6 +20,7 @@ class StudyActivity : AppCompatActivity() {
     private lateinit var startButton: Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var selectedMethodTextView: TextView
+    private lateinit var mediaPlayer : MediaPlayer
 
 
 
@@ -165,9 +167,19 @@ class StudyActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.music ->{
+                val intent = Intent(this, MusicPlayer::class.java)
+                startActivity(intent)
+            }
             R.id.logout ->{
+                if(::mediaPlayer.isInitialized) {
+                    mediaPlayer.stop()
+                    mediaPlayer.release()
+
+                }
                 val intent = Intent(this, LoginActivity2::class.java)
                 startActivity(intent)
+                finish()
             }
         }
         return false;

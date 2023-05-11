@@ -1,6 +1,7 @@
 package com.example.studybuddy20
 
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.MenuItem
@@ -29,6 +30,8 @@ class timerTaskActivity : AppCompatActivity() {
 
     private var isPaused = false
     private var remianingTime = 0L
+
+    private lateinit var mediaPlayer : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -148,9 +151,19 @@ class timerTaskActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.music ->{
+                val intent = Intent(this, MusicPlayer::class.java)
+                startActivity(intent)
+            }
             R.id.logout ->{
+                if(::mediaPlayer.isInitialized) {
+                    mediaPlayer.stop()
+                    mediaPlayer.release()
+
+                }
                 val intent = Intent(this, LoginActivity2::class.java)
                 startActivity(intent)
+                finish()
             }
         }
         return false;

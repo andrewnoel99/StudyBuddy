@@ -1,6 +1,7 @@
 package com.example.studybuddy20
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -16,6 +17,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var studyMethods: Button
     private lateinit var timerButton: Button
+    private lateinit var mediaPlayer: MediaPlayer
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +55,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.music ->{
+                val intent = Intent(this, MusicPlayer::class.java)
+                startActivity(intent)
+            }
             R.id.logout ->{
+                if(::mediaPlayer.isInitialized) {
+                    mediaPlayer.stop()
+                    mediaPlayer.release()
+
+                }
                 val intent = Intent(this, LoginActivity2::class.java)
                 startActivity(intent)
+                finish()
             }
         }
         return false;
