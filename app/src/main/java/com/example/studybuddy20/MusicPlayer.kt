@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MusicPlayer : AppCompatActivity() {
     private lateinit var mediaPlayer: MediaPlayer
-    private val mp3Files = arrayOf(R.raw.lofi, R.raw.pokemon)
+    private val mp3Files = arrayOf(R.raw.lofi, R.raw.jazz)
     private var selectedFile: Int? = null
     private var playbackPos = 0
     private var isPaused = false
