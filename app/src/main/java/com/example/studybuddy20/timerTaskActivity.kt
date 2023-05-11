@@ -148,6 +148,10 @@ class timerTaskActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
+            R.id.logout ->{
+                val intent = Intent(this, LoginActivity2::class.java)
+                startActivity(intent)
+            }
         }
         return false;
     }

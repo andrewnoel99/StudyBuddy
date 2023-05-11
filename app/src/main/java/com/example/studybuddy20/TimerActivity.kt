@@ -1,15 +1,18 @@
 package com.example.studybuddy20
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class TimerActivity : AppCompatActivity() {
 
@@ -25,7 +28,7 @@ class TimerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_timer)
+        setContentView(R.layout.activity_timerconstraint)
 
 
 
@@ -66,6 +69,10 @@ class TimerActivity : AppCompatActivity() {
         }
 
 
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            onNavigationItemSelected(item)
+        }
 
     }
 
@@ -132,5 +139,18 @@ class TimerActivity : AppCompatActivity() {
 
     }
 
+    private fun onNavigationItemSelected(item: MenuItem): Boolean{
+        when (item.itemId){
+            R.id.home ->{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.logout ->{
+                val intent = Intent(this, LoginActivity2::class.java)
+                startActivity(intent)
+            }
+        }
+        return false;
+    }
 
 }

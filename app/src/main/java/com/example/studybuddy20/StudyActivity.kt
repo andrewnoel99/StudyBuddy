@@ -4,12 +4,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.io.Serializable
 
 class StudyActivity : AppCompatActivity() {
@@ -101,7 +103,7 @@ class StudyActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_study)
+        setContentView(R.layout.activity_studyconstraint)
 
         startButton = findViewById(R.id.button_start_studying)
         startButton.setBackgroundColor(Color.parseColor("#356859"))
@@ -150,8 +152,25 @@ class StudyActivity : AppCompatActivity() {
         startButton = findViewById(R.id.button_start_studying)
         startButton.isEnabled = false
         selectedMethodTextView.text = "Select a study method"
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottomNav)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            onNavigationItemSelected(item)
+        }
     }
 
-
+    private fun onNavigationItemSelected(item: MenuItem): Boolean{
+        when (item.itemId){
+            R.id.home ->{
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.logout ->{
+                val intent = Intent(this, LoginActivity2::class.java)
+                startActivity(intent)
+            }
+        }
+        return false;
+    }
 
 }
